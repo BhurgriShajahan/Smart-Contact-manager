@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<section>
+		<div class="card mr-3 ml-3" th:if="${user}">
+			
+			<div class="card-body">
+				
+				<div class="container text-center">
+					
+					<img style="width: 200px; height: 200px;" class="my_profille_picture" th:src="@{'/img/'+${user.imageUrl}}"
+						alt="profile image" />
+					<h3 class="mt-3"><span th:text="${user.name}"></span> <!--(  <span th:text="${user.secondName}"></span> )--></h3>
+					<div class="table-responsive">
+					 <table class="table">
+				 <thead>
+					 <tr>
+						 <th scope="col">#ID</th>
+						 <th scope="col">SCMUSER<span th:text="${user.id}"></span></th>
+					 </tr>
+				 </thead>
+				 
+				 <tbody>
+					 
+					 <tr>
+						 <th scope="row">Email</th>
+						 <td ><span th:text="${user.email}"></span></td>
+					 </tr>
+					 
+					<!-- <tr>
+						 <th scope="row">Phone</th>
+						 <td ><span th:text="${contact.phone}"></span></td>
+					 </tr>-->
+					 
+					<tr>
+						 <th scope="row">Work</th>
+						 <td ><span th:text="${user.about}"></span></td>
+					 </tr>
+					 
+				 </tbody>
+					
+					 </table>
+					 </div>
+					 <div class="description mt-3">
+						 <th:block th:utext="${user.about}"></th:block>
+						 
+					 </div>
+					 
+					 <div class="container mt-3">
+						 <button th:onclick="|deleteUser(${user.id})|" class="btn btn-danger btm-sm btn-block">Delete</button>
+							 
+							<form method="post" th:action="@{'/admin/update-user/'+${user.id}}" class="mt-2">
+							 <button type="submit" class="btn btn-primary btm-sm btn-block">Update</button>
+							 </form>
+					 </div>
+					 
+				</div>
+				
+			</div>
+			
+			
+			
+		</div>
+			<h1 class="text-center p-3 bg-danger text-white" th:unless="${user}">You don't have permission to see this contact...</h1>
+	</section>
+</body>
+</html>
